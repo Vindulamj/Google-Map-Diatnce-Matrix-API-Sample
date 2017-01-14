@@ -1,4 +1,4 @@
- <?php
+  <?php
  
 //reading the routes.txt file
 echo "Loading the routes.txt".PHP_EOL;
@@ -20,19 +20,18 @@ WriteToFile(PHP_EOL);
 WriteToFile(PHP_EOL);
 for($x = 0; $x <= count($list); $x=$x+3) {
 	
-	
 	$route_name = $list[$x];
-    $start =  $list[$x+1];
+    	$start =  $list[$x+1];
 	$destination = $list[$x+2];
 	
 	//api call
-	$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metrics&origins=".$start."&destinations=".$destination."&key=YOUR_API_KEY";
+	$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metrics&origins=".$start."&destinations=".$destination."&key=AIzaSyAiuGv4Ljuv_zGrOXQuK4lAx-8REomt1c0&mode=driving&transit_mode=bus&traffic_model=best_guess&departure_time=now";
 	$response = file_get_contents($url);
 	
 	//json decode 
 	$json_decoded = json_decode($response);
 	$distance =  $json_decoded->rows[0]->elements[0]->distance->text;
-	$duration = $json_decoded->rows[0]->elements[0]->duration->text;
+	$duration = $json_decoded->rows[0]->elements[0]->duration_in_traffic->text;
 	
 	//write to the results file
 	$write_line = $route_name.",".$distance.",".$duration.",".$timezone.",".$created_dateTime;
@@ -46,6 +45,4 @@ echo "Successfully completed";
 function WriteToFile($text){
 	$myfile = file_put_contents('results.csv', $text , FILE_APPEND);
 }
-
-
 ?> 

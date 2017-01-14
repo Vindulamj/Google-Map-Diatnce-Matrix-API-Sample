@@ -25,7 +25,7 @@ for($x = 0; $x <= count($list); $x=$x+3) {
 	$destination = $list[$x+2];
 	
 	//api call
-	$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metrics&origins=".$start."&destinations=".$destination."&key=AIzaSyAiuGv4Ljuv_zGrOXQuK4lAx-8REomt1c0&mode=driving&transit_mode=bus&traffic_model=best_guess&departure_time=now";
+	$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metrics&origins=".$start."&destinations=".$destination."&key=YOUR_API_KEY&mode=driving&transit_mode=bus&traffic_model=best_guess&departure_time=now";
 	$response = file_get_contents($url);
 	
 	//json decode 

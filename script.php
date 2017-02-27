@@ -1,4 +1,4 @@
-  <?php
+<?php
  
 //reading the routes.txt file
 echo "Loading the routes.txt".PHP_EOL;
@@ -18,10 +18,13 @@ $timezone = date_default_timezone_get();
 echo "Calculating the results..".PHP_EOL;
 WriteToFile(PHP_EOL);
 WriteToFile(PHP_EOL);
+
+$returned_info_list = array();
+
 for($x = 0; $x <= count($list); $x=$x+3) {
 	
 	$route_name = $list[$x];
-    	$start =  $list[$x+1];
+    $start =  $list[$x+1];
 	$destination = $list[$x+2];
 	
 	//api call
@@ -35,10 +38,12 @@ for($x = 0; $x <= count($list); $x=$x+3) {
 	
 	//write to the results file
 	$write_line = $route_name.",".$distance.",".$duration.",".$timezone.",".$created_dateTime;
-	if($route_name != null) {
-			WriteToFile($write_line);
-	}
+	echo $write_line;
+	$returned_info_list[count($returned_info_list)+1] = $write_line;
 } 
+for($x = 0; $x <= count($returned_info_list); $x=$x+1) {
+	WriteToFile($returned_info_list[$x]);
+}
 echo "Successfully completed";
 
 //function for writing to a file
